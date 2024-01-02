@@ -40,7 +40,15 @@ async function UpdateProduct(req,res,next){
         })
     })
 }
-async function DeleteProduct(req,res,next){}
+async function DeleteProduct(req,res,next){
+
+    const {id}=req.params;
+
+    productClient.DeleteProduct({id},(err,data)=>{
+        if(err) return console.log(err);
+        res.json(data)
+    })
+}
 module.exports= {
     ListProduct,
     GetProduct,
