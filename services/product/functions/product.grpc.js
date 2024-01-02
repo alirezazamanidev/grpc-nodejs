@@ -35,7 +35,21 @@ async function CreateProduct(call,callBack){
         callBack(error,null);
     }
 }
-async function UpdateProduct(call,callBack){}
+async function UpdateProduct(call,callBack){
+  try {
+    const {id} = call.request;
+    const data = call.request;
+    delete data.id;
+    const product=await ProductModel.findById(id);
+    if(!product) return callBack({message:"Product not found"},null);
+    product.updateOne({$set:data});
+    callBack(null, {status: "updated"})
+
+  } catch (error) {
+    callBack(error,null);
+  }
+
+}
 async function DeleteProduct(call,callBack){}
 
 module.exports={

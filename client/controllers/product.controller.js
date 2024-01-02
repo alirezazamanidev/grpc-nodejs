@@ -27,7 +27,19 @@ async function CreateProduct(req,res,next){
         return res.json(data)
     })
 }
-async function UpdateProduct(req,res,next){}
+async function UpdateProduct(req,res,next){
+    const data= {
+        id:req.params.id,
+        ...req.body
+
+    }
+    productClient.UpdateProduct(data,(err,data)=>{
+        if(err) return console.log(err);
+        res.status(200).json({
+            data
+        })
+    })
+}
 async function DeleteProduct(req,res,next){}
 module.exports= {
     ListProduct,
