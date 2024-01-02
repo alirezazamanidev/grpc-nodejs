@@ -13,7 +13,13 @@ const productClient = new productPackage.ProductService(productServiceURL, grpc.
         return res.json(data)
     })
 }
-async function GetProduct(req,res,next){}
+async function GetProduct(req,res,next){
+    const {id}=req.params;
+    productClient.GetProduct({id},(err,data)=>{
+        if(err) return console.log(err);
+        res.status(200).json(data);
+    })
+}
 async function CreateProduct(req,res,next){
     const {title,price}=req.body;
     productClient.CreateProduct({title,price},(err,data)=>{

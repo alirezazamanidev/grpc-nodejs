@@ -10,7 +10,21 @@ async function ListProduct(call,callBack){
     callBack(error,null);
    }
 }
-async function GetProduct(call,callBack){}
+async function GetProduct(call,callBack){
+    try {
+        const {id}=call.request;
+        
+        const product=await ProductModel.findById(id);
+        if(!product) return console.log('Product not founded');
+        callBack(null,{
+            id:product.id,
+            title:product.title,
+            price:product.price
+        })
+    } catch (error) {
+        callBack(error,null)
+    }
+}
 async function CreateProduct(call,callBack){
     try {
         const {title,price}=call.request;
