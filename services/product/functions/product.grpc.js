@@ -11,7 +11,16 @@ async function ListProduct(call,callBack){
    }
 }
 async function GetProduct(call,callBack){}
-async function CreateProduct(call,callBack){}
+async function CreateProduct(call,callBack){
+    try {
+        const {title,price}=call.request;
+        await ProductModel.create({title,price});
+        callBack(null,{status:"Created"});
+        
+    } catch (error) {
+        callBack(error,null);
+    }
+}
 async function UpdateProduct(call,callBack){}
 async function DeleteProduct(call,callBack){}
 

@@ -14,7 +14,13 @@ const productClient = new productPackage.ProductService(productServiceURL, grpc.
     })
 }
 async function GetProduct(req,res,next){}
-async function CreateProduct(req,res,next){}
+async function CreateProduct(req,res,next){
+    const {title,price}=req.body;
+    productClient.CreateProduct({title,price},(err,data)=>{
+        if(err) return res.json(err);
+        return res.json(data)
+    })
+}
 async function UpdateProduct(req,res,next){}
 async function DeleteProduct(req,res,next){}
 module.exports= {
